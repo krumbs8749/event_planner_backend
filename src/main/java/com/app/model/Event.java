@@ -1,9 +1,13 @@
 package com.app.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +29,7 @@ public class Event {
     private String location;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateTime;
+    private LocalDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -34,12 +38,16 @@ public class Event {
     private Double totalCost;
 
     @OneToMany(mappedBy = "event")
+    @Nullable
     private List<CostSource> costs;
 
     @OneToMany(mappedBy = "event")
+    @Nullable
     private List<Task> tasks;
 
     private Integer totalSeats;
     private Integer totalRegistration;
+
+
 
 }

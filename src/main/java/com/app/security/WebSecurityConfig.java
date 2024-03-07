@@ -16,6 +16,8 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
+                                "/api/**",
+                                "error",
                                 "/api/auth/**",
                                 "/swagger-ui.html",
                                 "/configuration/ui",

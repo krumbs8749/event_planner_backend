@@ -1,6 +1,8 @@
 package com.app.service;
 
+import com.app.model.CostCategory;
 import com.app.model.CostSource;
+import com.app.repository.CostCategoryRepository;
 import com.app.repository.CostSourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +13,9 @@ import java.util.Optional;
 @Service
 public class CostSourceService {
 
-    private final CostSourceRepository costSourceRepository;
-
     @Autowired
-    public CostSourceService(CostSourceRepository costSourceRepository) {
-        this.costSourceRepository = costSourceRepository;
-    }
+    private CostSourceRepository costSourceRepository;
+
 
     @Transactional
     public CostSource createOrUpdateCostSource(CostSource costSource) {

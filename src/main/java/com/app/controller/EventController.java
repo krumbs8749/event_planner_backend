@@ -1,10 +1,12 @@
 package com.app.controller;
 
+import com.app.dto.EventDto;
 import com.app.model.Event;
 import com.app.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +21,10 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @GetMapping
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Event>> getAllEvents() {
+        List<Event> events = eventService.getAllEvents();
+        return ResponseEntity.ok(events); // This automatically wraps the list in a ResponseEntity with OK status
     }
 
     @GetMapping("/get/{id}")
@@ -34,19 +37,22 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public Event createEvent(@RequestBody Event event) {
+    public Event createEvent(@RequestBody EventDto event) {
         return eventService.createOrUpdateEvent(event);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event eventDetails) {
+    @PutMapping("/update")
+    public ResponseEntity<Event> updateEvent(@RequestBody EventDto eventDetails) {
         // Update the event
         return ResponseEntity.ok(eventService.createOrUpdateEvent(eventDetails));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
-        eventService.deleteEvent(id);
+    @DeleteMapping("/delete/{eventName}/{location}/{datetime}")
+    public ResponseEntity<Void> deleteEvent(
+            @PathVariable String eventName,
+            @PathVariable String location,
+            @PathVariable String datetime) {
+        eventService.deleteEvent(eventName, location, datetime);
         return ResponseEntity.ok().build();
     }
 }

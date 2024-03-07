@@ -1,6 +1,8 @@
 package com.app.model;
 
+import com.app.dto.EventCompactDto;
 import com.app.model.Event;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,10 @@ public class Attendee {
 
     @ManyToOne
     @JoinColumn(name = "event_id")
+    @Nullable
     private Event eventRegistered;
+
+
     private String status;
 
     // Constructors, getters, and setters

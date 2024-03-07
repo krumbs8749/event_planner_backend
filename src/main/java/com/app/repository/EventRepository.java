@@ -1,13 +1,15 @@
 package com.app.repository;
 
 import com.app.model.Event;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public interface EventRepository extends JpaRepository <Event, Long> {
 
-    Optional<Event> findByNameAndLocationAndDateTime(String name, String location, Date dateTime);
+    Optional<Event> findByNameAndLocationAndDateTime(String name, String location, LocalDateTime dateTime);
+
+    void deleteByNameAndLocationAndDateTime(@NotBlank(message = "Name cannot be blank") String name, String location, LocalDateTime dateTime);
 }
