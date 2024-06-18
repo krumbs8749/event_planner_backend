@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventCompactDto {
+    @JsonProperty
+    private Long id;
     @JsonProperty
     private String name;
     @JsonProperty

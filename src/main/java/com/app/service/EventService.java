@@ -18,10 +18,9 @@ import java.util.Optional;
 @Service
 public class EventService {
     private final EventRepository eventRepository;
-    private final AttendeeRepository  attendeeRepository;
+    private final AttendeeRepository attendeeRepository;
 
     private final OwnerService ownerService;
-
 
 
     @Autowired
@@ -36,7 +35,7 @@ public class EventService {
         // Check whether all necessary data is available
         if (eventDto.getName() == null || eventDto.getDescription() == null ||
                 eventDto.getLocation() == null || eventDto.getDateTime() == null ||
-                eventDto.getOwner() == null ) {
+                eventDto.getOwner() == null) {
             throw new IllegalArgumentException("Missing data for the event");
         }
         // Check if a task with the same name and event already exists
@@ -70,6 +69,7 @@ public class EventService {
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }
+
     public Optional<Event> getEventById(Long id) {
         return eventRepository.findById(id);
     }
@@ -93,11 +93,9 @@ public class EventService {
                 .orElseThrow(() -> new RuntimeException("Attendee not found with id: " + attendeeId));
 
         event.setTotalRegistration(event.getTotalRegistration() + 1);
-        attendee.setEventRegistered(event); // Assuming Attendee has a 'setEvent(Event event)' method
+        attendee.setEvent(event); // Assuming Attendee has a 'setEvent(Event event)' method
         eventRepository.save(event);
     }
-
-
 
 
     // Additional business logic methods as required

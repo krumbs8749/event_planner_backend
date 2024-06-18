@@ -4,13 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
+
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventDto {
+    @JsonProperty
+    private String id;
     @JsonProperty
     private String name;
     @JsonProperty
@@ -27,4 +30,6 @@ public class EventDto {
     private Integer totalSeats;
     @JsonProperty
     private Integer totalRegistration;
+    @JsonProperty
+    private List<AttendeeDto> attendees;
 }

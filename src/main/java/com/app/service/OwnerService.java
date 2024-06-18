@@ -5,6 +5,7 @@ import com.app.model.Owner;
 import com.app.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,7 @@ public class OwnerService {
 
     // Convert an Owner entity to an OwnerDto
     private OwnerDto convertToDto(Owner owner) {
-        return new OwnerDto(owner.getName(), owner.getEmail(), owner.getPhoneNumber());
+        return new OwnerDto(owner.getId(), owner.getName(), owner.getEmail(), owner.getPhoneNumber());
     }
 
     // Create or Update an Owner from an OwnerDto

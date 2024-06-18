@@ -10,6 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 public class OwnerDto {
     @JsonProperty
+    private Long id;
+    @JsonProperty
     private String name;
     @JsonProperty
     private String email;

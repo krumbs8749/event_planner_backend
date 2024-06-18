@@ -1,14 +1,11 @@
 package com.app.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -25,7 +22,6 @@ public class Event {
     private String name;
 
     private String description;
-
     private String location;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -37,17 +33,18 @@ public class Event {
 
     private Double totalCost;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     @Nullable
     private List<CostSource> costs;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     @Nullable
     private List<Task> tasks;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Nullable
+    private List<Attendee> attendees;
+
     private Integer totalSeats;
     private Integer totalRegistration;
-
-
-
 }
