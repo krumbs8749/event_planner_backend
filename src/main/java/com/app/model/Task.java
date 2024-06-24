@@ -1,5 +1,6 @@
 package com.app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,19 +34,9 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "event_id")
+    @JsonBackReference
     private Event event;
 
     // Constructors, getters, and setters
 }
 
-enum TaskStatus {
-    NOT_STARTED,
-    IN_PROGRESS,
-    COMPLETED
-}
-
-enum TaskPriority {
-    LOW,
-    MEDIUM,
-    HIGH
-}

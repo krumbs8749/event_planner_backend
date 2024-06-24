@@ -1,5 +1,6 @@
 package com.app.dto;
 
+import com.app.model.EventStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -32,4 +33,6 @@ public class EventDto {
     private Integer totalRegistration;
     @JsonProperty
     private List<AttendeeDto> attendees;
+    @JsonProperty
+    private EventStatus status;
 }

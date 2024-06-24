@@ -1,12 +1,11 @@
 package com.app.controller;
 
-import com.app.dto.EventDto;
+import com.app.dto.*;
 import com.app.model.Event;
 import com.app.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +29,7 @@ public class EventController {
     @GetMapping("/get/{id}")
     public ResponseEntity<Optional<Event>> getEventById(@PathVariable Long id) {
         Optional<Event> event = eventService.getEventById(id);
+        System.out.println(event);
         if (event.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -54,5 +54,20 @@ public class EventController {
             @PathVariable String datetime) {
         eventService.deleteEvent(eventName, location, datetime);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update/costs/{eventId}")
+    public void addOrUpdateCost(@PathVariable Long eventId, @RequestBody CostSourceDto costSourceDto) {
+        eventService.addOrUpdateCost(eventId, costSourceDto);
+    }
+
+    @PutMapping("/update/tasks/{eventId}")
+    public void addOrUpdateTask(@PathVariable Long eventId, @RequestBody TaskDto taskDto) {
+        eventService.addOrUpdateTask(eventId, taskDto);
+    }
+
+    @PutMapping("/update/attendees/{eventId}")
+    public void addOrUpdateAttendee(@PathVariable Long eventId, @RequestBody AttendeeDto attendeeDto) {
+        eventService.addOrUpdateAttendee(eventId, attendeeDto);
     }
 }

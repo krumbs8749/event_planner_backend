@@ -1,9 +1,11 @@
 package com.app.model;
 
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,17 +36,21 @@ public class Event {
     private Double totalCost;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Nullable
+    @JsonManagedReference
     private List<CostSource> costs;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Nullable
+    @JsonManagedReference
     private List<Task> tasks;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Nullable
+    @JsonManagedReference
     private List<Attendee> attendees;
 
     private Integer totalSeats;
     private Integer totalRegistration;
+
+    @Enumerated(EnumType.STRING)
+    private EventStatus status = EventStatus.LIVE;
 }
+
